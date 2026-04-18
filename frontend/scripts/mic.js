@@ -5,9 +5,9 @@ let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
 
-window.addEventListener("beforeunload", () => {
-  console.log("PAGE IS RELOADING");
-});
+// window.addEventListener("beforeunload", () => {
+//   console.log("PAGE IS RELOADING");
+// });
 
 recordBtn.addEventListener("click", async (event) => {
   event.preventDefault();
