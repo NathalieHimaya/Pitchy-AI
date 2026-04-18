@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pitchy| Master Your Narrative</title>
+  <title>Pitchy-AI | Master Your Narrative</title>
   <link rel="icon" href="assets/Pitch-AI-Logo.png">
-
-
+  <!-- External stylesheet -->
   <link rel="stylesheet" href="styling/styles.css">
   
 
@@ -15,4 +14,304 @@
   <script src="script.js" defer></script>
 </head>
 
+<body>
 
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div style="padding: var(--space-8);">
+
+      <!-- Brand -->
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">
+          <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">
+            rocket_launch
+          </span>
+        </div>
+        <div>
+          <p class="sidebar__app-name">Pitchy-AI AI</p>
+          <p class="sidebar__app-tagline">Series A Ready</p>
+        </div>
+      </div>
+
+      <!-- Primary Navigation -->
+      <nav class="sidebar__nav">
+        <a href="landing.html" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">home</span>
+          Home
+        </a>
+        <a href="dashboard.html" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">insights</span>
+          Performance
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">psychology</span>
+          AI Feedback
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">groups</span>
+          Audience Insights
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">settings_suggest</span>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <!-- Footer -->
+    <div class="sidebar__footer">
+
+      <!-- Upgrade card -->
+      <div class="upgrade-card">
+        <p class="upgrade-card__label">Upgrade to Pro</p>
+        <p class="upgrade-card__body">Unlock advanced neural analysis</p>
+        <button class="upgrade-card__btn">Get Started</button>
+      </div>
+
+      <!-- Footer nav -->
+      <nav class="sidebar__footer-nav">
+        <a href="#" class="sidebar__footer-link">
+          <span class="material-symbols-outlined">help</span>
+          Help Center
+        </a>
+        <a href="#" class="sidebar__footer-link">
+          <span class="material-symbols-outlined">logout</span>
+          Logout
+        </a>
+      </nav>
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN CANVAS -->
+  <main class="main-canvas">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+
+        <!-- Left: logo placeholder (hidden on desktop, sidebar handles it) -->
+        <div class="flex items-center gap-8">
+          <span></span>
+        </div>
+
+        <!-- Center: Search -->
+        <div class="header__search">
+          <div class="search-wrapper">
+            <span class="material-symbols-outlined search-wrapper__icon">search</span>
+            <input
+              class="search-input"
+              type="text"
+              placeholder="Search pitches, feedback, or insights…"
+            >
+          </div>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="header__actions">
+          <div class="header__icon-group">
+            <span class="material-symbols-outlined header__icon">notifications</span>
+            <!-- <span class="material-symbols-outlined header__icon">settings</span> -->
+          </div>
+          <!-- <button class="header__new-pitch-btn">New Pitch</button> -->
+          <img
+            class="header__avatar"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo1RfZDWeO9tZ8AvCMImLX0---3qZPg-2rEUyXwqnVQc48Zu6dv4NY86CzZjA-OpWU3Bxeb1_s3-NU9ku_Ddl9n7KJwH-j2t3E1zNbKmwj7BAZc8wwf8Z0UtfHQtd-XmK5A_kqev4Qa2jlOVC0AQSuGKHOb49fSY_1GgM-76jDamRMQ9HkCjhG1jf0dzLspbd3isho9JfazVbHkLoXyWu2LW5_EaBp-s63HjNAqTeL0PXMdoQwkMuw1FiCFazFmed-LrqxbIrxlSI"
+            alt="User profile"
+          >
+        </div>
+
+      </div>
+    </header>
+
+
+    <!-- Page Content -->
+    <section class="page-section">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div class="live-badge">
+          <span class="live-badge__dot"></span>
+          <span class="live-badge__label">Live Session</span>
+        </div>
+        <h2 class="page-header__title">Hone Your Narrative.</h2>
+        <p class="page-header__subtitle">
+          Speak your vision or draft the core components. Our AI will analyze your
+          tone, pace, and value proposition in real-time.
+        </p>
+      </div>
+
+
+      <!-- Bento Grid -->
+      <div class="bento-grid">
+
+        <!-- Left column -->
+        <div class="bento-main">
+
+          <!-- Recording Card -->
+          <div class="card recording-card card--padded-xl">
+            <div class="recording-card__shine"></div>
+            <div class="recording-card__body">
+
+              <!-- Waveform -->
+              <div class="waveform">
+                <div class="waveform__bar" style="height:40%; background:rgba(60,144,255,0.4); animation-delay:0.1s;"></div>
+                <div class="waveform__bar" style="height:60%; background:rgba(60,144,255,0.6); animation-delay:0.3s;"></div>
+                <div class="waveform__bar" style="height:80%; background:var(--color-primary);   animation-delay:0.5s;"></div>
+                <div class="waveform__bar" style="height:100%;background:var(--color-primary-container); animation-delay:0.2s;"></div>
+                <div class="waveform__bar" style="height:70%; background:var(--color-primary);   animation-delay:0.4s;"></div>
+                <div class="waveform__bar" style="height:90%; background:rgba(60,144,255,0.8); animation-delay:0.1s;"></div>
+                <div class="waveform__bar" style="height:50%; background:rgba(60,144,255,0.4); animation-delay:0.6s;"></div>
+                <div class="waveform__bar" style="height:30%; background:rgba(60,144,255,0.6); animation-delay:0.3s;"></div>
+                <div class="waveform__bar" style="height:80%; background:var(--color-primary);   animation-delay:0.5s;"></div>
+                <div class="waveform__bar" style="height:45%; background:rgba(60,144,255,0.4); animation-delay:0.1s;"></div>
+                <div class="waveform__bar" style="height:25%; background:rgba(60,144,255,0.2); animation-delay:0.3s;"></div>
+              </div>
+
+              <!-- Controls -->
+              <div class="controls">
+                <button class="ctrl-btn ctrl-btn--secondary" aria-label="Voice settings">
+                  <span class="material-symbols-outlined ctrl-btn__icon">settings_voice</span>
+                </button>
+
+                <button type="button" id="recordBtn" class="ctrl-btn ctrl-btn--primary" aria-label="Start recording">
+                  <span class="material-symbols-outlined ctrl-btn__icon--lg"
+                        style="font-variation-settings: 'FILL' 1;">mic</span>
+                </button>
+
+                <button class="ctrl-btn ctrl-btn--secondary ctrl-btn--secondary--danger" aria-label="Stop recording">
+                  <span class="material-symbols-outlined ctrl-btn__icon">stop</span>
+                </button>
+              </div>
+
+              <p class="recording-card__hint">Click mic to start recording</p>
+            </div>
+          </div>
+
+
+          <!-- Script / Text Card -->
+          <div class="card card--padded-lg">
+
+            <div class="script-card__header">
+              <h3 class="script-card__title">Pitch Script</h3>
+              <div class="script-card__meta">
+                <span class="meta-pill">Word Count: 142</span>
+                <span class="meta-pill">Est. Time: 1:15</span>
+              </div>
+            </div>
+
+            <textarea
+              class="script-textarea"
+              placeholder="Start typing your pitch here…"
+            ></textarea>
+
+            <div class="script-card__actions">
+              <button class="btn-ghost">Save Draft</button>
+              <button class="btn-primary">Analyze Pitch</button>
+            </div>
+
+          </div>
+
+        </div><!-- /bento-main -->
+
+
+        <!-- Right column -->
+        <div class="bento-sidebar">
+
+          <!-- Real-time Insights -->
+          <div class="card card--padded-sm insights-card">
+            <h4 class="insights-card__heading">Real-time Insights</h4>
+
+            <div class="insights-list">
+
+              <div class="insight insight--primary">
+                <span class="material-symbols-outlined insight__icon--primary">auto_awesome</span>
+                <div>
+                  <p class="insight__title">Strong Opening</p>
+                  <p class="insight__body">
+                    Your hook effectively captures the problem space.
+                    Consider adding a specific metric here.
+                  </p>
+                </div>
+              </div>
+
+              <div class="insight insight--tertiary">
+                <span class="material-symbols-outlined insight__icon--tertiary">speed</span>
+                <div>
+                  <p class="insight__title">Pacing Alert</p>
+                  <p class="insight__body">
+                    You're speaking at 160 WPM. Slow down during the "Solution"
+                    phase for maximum impact.
+                  </p>
+                </div>
+              </div>
+
+              <div class="insight insight--secondary">
+                <span class="material-symbols-outlined insight__icon--secondary">psychology</span>
+                <div>
+                  <p class="insight__title">Tone Analysis</p>
+                  <p class="insight__body">
+                    Confidence level: High. Emotional resonance is currently neutral.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- Sentiment Arc -->
+          <div class="card card--padded-sm">
+            <h4 class="sentiment-card__heading">Sentiment Arc</h4>
+
+            <div class="sentiment-bar">
+              <div class="sentiment-bar__segment" style="width:20%; background:rgba(60,144,255,0.4);"></div>
+              <div class="sentiment-bar__segment" style="width:30%; background:var(--color-primary);"></div>
+              <div class="sentiment-bar__segment" style="width:15%; background:var(--color-tertiary);"></div>
+              <div class="sentiment-bar__segment" style="width:35%; background:var(--color-primary-container);"></div>
+            </div>
+
+            <div class="sentiment-bar__labels">
+              <span class="sentiment-bar__label">Problem</span>
+              <span class="sentiment-bar__label">Solution</span>
+              <span class="sentiment-bar__label">Call to Action</span>
+            </div>
+          </div>
+
+
+          <!-- Pro Tip -->
+          <div class="pro-tip-card">
+            <img
+              class="pro-tip-card__bg"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtYeE32SaV-fsXsudAa27v163HqFE1LEq92lN681UgyqxzGiaKZ1neS_JJik-Hn2hheVhqx0vwsn77Ep_56OZOiHbG9fJji2dCdKz4tDxuesIsQrY5Y6UH-kkCF7Db_wcRIFo1HpqZdvOuuTFTTCVLb51Hy4UKdVG_CqJWFELJjkUcmeoU0s4dhvhgRzn0dt6H2oY6y2HdMGj4q1E4qk0iA_gop2lL940jgYGL74-N-oY5Pij6hyyyQfl0KJYlo9e0X_4B7Usd1HQ"
+              alt="Modern tech hub at dusk"
+            >
+            <div class="pro-tip-card__overlay"></div>
+            <div class="pro-tip-card__content">
+              <div class="pro-tip-card__label-row">
+                <span class="material-symbols-outlined pro-tip-card__label-icon">lightbulb</span>
+                <span class="pro-tip-card__label">Pro Tip</span>
+              </div>
+              <p class="pro-tip-card__quote">
+                "The best pitches don't just state facts; they tell a story where
+                the customer is the hero and your product is the sword."
+              </p>
+            </div>
+          </div>
+
+        </div><!-- /bento-sidebar -->
+
+      </div><!-- /bento-grid -->
+
+    </section>
+
+  </main>
+
+</body>
+</html>
