@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ============================================================
    Pitch Pal — Custom Styles
    ============================================================ */
@@ -7,12 +8,21 @@
 
 
 /* ---------- Material Symbols ---------- */
+=======
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+>>>>>>> 46dd092 (Styling)
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+<<<<<<< HEAD
 
 /* ---------- Glass Panel Utility ---------- */
+=======
+>>>>>>> 46dd092 (Styling)
 .glass-panel {
   background:            rgba(40, 42, 44, 0.6);
   backdrop-filter:       blur(20px);
@@ -20,27 +30,39 @@
 }
 
 
+<<<<<<< HEAD
 /* ---------- Smooth Scrolling ---------- */
+=======
+>>>>>>> 46dd092 (Styling)
 html {
   scroll-behavior: smooth;
 }
 
 
+<<<<<<< HEAD
 /* ---------- Selection Colours ---------- */
+=======
+>>>>>>> 46dd092 (Styling)
 ::selection {
   background-color: var(--color-primary-container);
   color: #ffffff;
 }
 
 
+<<<<<<< HEAD
 /* ---------- Nav Link Active State ---------- */
+=======
+>>>>>>> 46dd092 (Styling)
 .nav-link-active {
   color: #60a5fa; /* blue-400 */
   font-weight: 700;
 }
 
+<<<<<<< HEAD
 
 /* ---------- Hero Glow Blobs ---------- */
+=======
+>>>>>>> 46dd092 (Styling)
 .hero-blob-left {
   position: absolute;
   top:    25%;
@@ -64,7 +86,11 @@ html {
 }
 
 
+<<<<<<< HEAD
 /* ---------- Dimension Cards — left-border accent colours ---------- */
+=======
+/* Dimension Cards left-border accent colours  */
+>>>>>>> 46dd092 (Styling)
 .card-accent-primary {
   border-left: 4px solid rgba(169, 199, 255, 0.4);   /* primary/40 */
 }
@@ -110,6 +136,7 @@ html {
 .btn-primary-br {
   background: linear-gradient(to bottom right, #a9c7ff, #3c90ff);
 }
+<<<<<<< HEAD
 /* 
 Landing User CSS */
 
@@ -979,3 +1006,5 @@ input {
  .no-scrollbar::-webkit-scrollbar {
      display: none;
  }
+=======
+>>>>>>> 46dd092 (Styling)
