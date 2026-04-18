@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.glass-panel {
+  background:            rgba(40, 42, 44, 0.6);
+  backdrop-filter:       blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+::selection {
+  background-color: var(--color-primary-container);
+  color: #ffffff;
+}
+
+
+.nav-link-active {
+  color: #60a5fa; /* blue-400 */
+  font-weight: 700;
+}
+
+.hero-blob-left {
+  position: absolute;
+  top:    25%;
+  left:   25%;
+  width:  24rem;
+  height: 24rem;
+  background:    rgba(169, 199, 255, 0.2);   /* primary/20 */
+  filter:        blur(120px);
+  border-radius: 9999px;
+}
+
+.hero-blob-right {
+  position: absolute;
+  bottom: 25%;
+  right:  25%;
+  width:  24rem;
+  height: 24rem;
+  background:    rgba(255, 182, 145, 0.1);   /* tertiary/10 */
+  filter:        blur(120px);
+  border-radius: 9999px;
+}
+
+
+/* Dimension Cards left-border accent colours  */
+.card-accent-primary {
+  border-left: 4px solid rgba(169, 199, 255, 0.4);   /* primary/40 */
+}
+
+.card-accent-tertiary {
+  border-left: 4px solid rgba(255, 182, 145, 0.4);   /* tertiary/40 */
+}
+
+
+/* ---------- Workflow Step Images ---------- */
+.workflow-image {
+  border-radius:    0.5rem;
+  height:           12rem;
+  width:            100%;
+  object-fit:       cover;
+  filter:           grayscale(100%);
+  transition:       filter 500ms ease;
+}
+
+.workflow-image:hover {
+  filter: grayscale(0%);
+}
+
+
+/* ---------- CTA Section Glow ---------- */
+.cta-glow {
+  position:      absolute;
+  top:           -6rem;
+  right:         -6rem;
+  width:         16rem;
+  height:        16rem;
+  background:    rgba(169, 199, 255, 0.2);
+  filter:        blur(100px);
+  border-radius: 9999px;
+}
+
+
+/* ---------- Primary Button Gradient ---------- */
+.btn-primary {
+  background: linear-gradient(to right, #a9c7ff, #3c90ff);
+}
+
+.btn-primary-br {
+  background: linear-gradient(to bottom right, #a9c7ff, #3c90ff);
+}
