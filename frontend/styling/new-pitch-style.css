@@ -1,12 +1,11 @@
-/* ---------- Google Fonts ---------- */
+/*/ Google Fonts /*/
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 
-/* ---------- Design Tokens ---------- */
+/*/ Design Variables /*/
 :root {
-  /* Brand Colors */
   --color-primary:                  #3c90ff;
   --color-primary-container:        #1a5cbf;
   --color-on-primary-fixed:         #ffffff;
@@ -16,7 +15,6 @@
 
   --color-error:                    #ff5555;
 
-  /* Surfaces */
   --color-background:               #0e1012;
   --color-surface-container-lowest: #111316;
   --color-surface-container-low:    #161820;
@@ -24,23 +22,18 @@
   --color-surface-container-high:   #22262c;
   --color-surface-container-highest:#2a2e36;
 
-  /* Text */
   --color-on-background:            #e8eaf0;
   --color-on-surface:               #dde0e8;
   --color-on-surface-variant:       #8a9ab8;
 
-  /* Borders */
   --color-outline-variant:          #414754;
 
-  /* Sidebar */
   --sidebar-bg:                     #1a1c1e;
   --sidebar-width:                  16rem; /* 256 px / w-64 */
 
-  /* Header */
   --header-bg:                      rgba(18, 20, 22, 0.6);
   --header-height:                  4rem;
 
-  /* Spacing scale */
   --space-1:  0.25rem;
   --space-2:  0.5rem;
   --space-3:  0.75rem;
@@ -51,23 +44,20 @@
   --space-10: 2.5rem;
   --space-12: 3rem;
 
-  /* Radius */
   --radius-sm:  0.5rem;
   --radius-md:  0.75rem;
   --radius-lg:  1rem;
   --radius-full: 9999px;
 
-  /* Typography */
   --font-body:     'Inter', sans-serif;
   --font-headline: 'Manrope', sans-serif;
 
-  /* Shadows */
   --shadow-primary-glow: 0 0 50px rgba(60, 144, 255, 0.3);
   --shadow-card:         0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 
-/* ---------- Base Reset & Globals ---------- */
+/*/ Base Reset & Globals /*/
 *,
 *::before,
 *::after {
@@ -105,16 +95,14 @@ input {
 }
 
 
-/* ---------- Material Symbols ---------- */
+/*/ Material Symbols /*/
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   user-select: none;
 }
 
 
-/* ============================================================
-   Layout — Sidebar
-   ============================================================ */
+/*/ Layout — Sidebar /*/
 .sidebar {
   display: none;
   flex-direction: column;
@@ -271,9 +259,7 @@ input {
 .sidebar__footer-link:hover { color: #e2e8f0; }
 
 
-/* ============================================================
-   Layout — Main Canvas
-   ============================================================ */
+/*/ Layout — Main Canvas /*/
 .main-canvas {
   min-height: 100vh;
 }
@@ -283,9 +269,7 @@ input {
 }
 
 
-/* ============================================================
-   Header / Top Nav
-   ============================================================ */
+/*/ Top Navigation /*/
 .header {
   background-color: var(--header-bg);
   backdrop-filter: blur(20px);
@@ -399,9 +383,7 @@ input {
 }
 
 
-/* ============================================================
-   Page Section
-   ============================================================ */
+/*/ Page Section /*/
 .page-section {
   padding: var(--space-8) var(--space-8) var(--space-12);
   max-width: 80rem;
@@ -467,9 +449,7 @@ input {
 }
 
 
-/* ============================================================
-   Bento Grid
-   ============================================================ */
+/*/ Bento Grid /*/
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -490,9 +470,7 @@ input {
 .bento-sidebar { display: flex; flex-direction: column; gap: var(--space-6); }
 
 
-/* ============================================================
-   Card — Base
-   ============================================================ */
+/*/ Card — Base /*/
 .card {
   background-color: var(--color-surface-container-low);
   border-radius: var(--radius-sm);
@@ -503,9 +481,7 @@ input {
 .card--padded-sm { padding: var(--space-6); }
 
 
-/* ============================================================
-   Recording Card
-   ============================================================ */
+/*/ Recording Card /*/
 .recording-card {
   position: relative;
   overflow: hidden;
@@ -605,9 +581,7 @@ input {
 }
 
 
-/* ============================================================
-   Script Card
-   ============================================================ */
+/*/ Script Card /*/
 .script-card__header {
   display: flex;
   align-items: center;
@@ -697,10 +671,7 @@ input {
 .btn-primary:active { transform: scale(0.95); }
 
 
-/* ============================================================
-   Sidebar Cards
-   ============================================================ */
-
+/*/ Sidebar Cards /*/
 /* Insights card */
 .insights-card {
   border: 1px solid rgba(65, 71, 84, 0.05);
