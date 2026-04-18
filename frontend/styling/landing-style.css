@@ -1,11 +1,14 @@
+/* ---------- Google Fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
+
+/* ---------- Material Symbols ---------- */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+
+/* ---------- Glass Panel Utility ---------- */
 .glass-panel {
   background:            rgba(40, 42, 44, 0.6);
   backdrop-filter:       blur(20px);
@@ -13,29 +16,34 @@
 }
 
 
+/* ---------- Smooth Scrolling ---------- */
 html {
   scroll-behavior: smooth;
 }
 
 
+/* ---------- Selection Colours ---------- */
 ::selection {
   background-color: var(--color-primary-container);
   color: #ffffff;
 }
 
 
+/* ---------- Nav Link Active State ---------- */
 .nav-link-active {
-  color: #60a5fa; 
+  color: #60a5fa; /* blue-400 */
   font-weight: 700;
 }
 
+
+/* ---------- Hero Glow Blobs ---------- */
 .hero-blob-left {
   position: absolute;
   top:    25%;
   left:   25%;
   width:  24rem;
   height: 24rem;
-  background:    rgba(169, 199, 255, 0.2);   
+  background:    rgba(169, 199, 255, 0.2);   /* primary/20 */
   filter:        blur(120px);
   border-radius: 9999px;
 }
@@ -46,21 +54,23 @@ html {
   right:  25%;
   width:  24rem;
   height: 24rem;
-  background:    rgba(255, 182, 145, 0.1); 
+  background:    rgba(255, 182, 145, 0.1);   /* tertiary/10 */
   filter:        blur(120px);
   border-radius: 9999px;
 }
 
 
-/* Dimension Cards left-border accent colours  */
+/* ---------- Dimension Cards — left-border accent colours ---------- */
 .card-accent-primary {
-  border-left: 4px solid rgba(169, 199, 255, 0.4);   
+  border-left: 4px solid rgba(169, 199, 255, 0.4);   /* primary/40 */
 }
 
 .card-accent-tertiary {
-  border-left: 4px solid rgba(255, 182, 145, 0.4);   
+  border-left: 4px solid rgba(255, 182, 145, 0.4);   /* tertiary/40 */
 }
 
+
+/* ---------- Workflow Step Images ---------- */
 .workflow-image {
   border-radius:    0.5rem;
   height:           12rem;
@@ -75,7 +85,7 @@ html {
 }
 
 
-/* CTA Section Glows */
+/* ---------- CTA Section Glow ---------- */
 .cta-glow {
   position:      absolute;
   top:           -6rem;
@@ -88,7 +98,7 @@ html {
 }
 
 
-/* Button Gradients */
+/* ---------- Primary Button Gradient ---------- */
 .btn-primary {
   background: linear-gradient(to right, #a9c7ff, #3c90ff);
 }

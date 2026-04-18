@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Analysis - Pitch Pal</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="styling/tailwind.config.js"></script>
+<link rel="stylesheet" href="styling/analysis-style.css" />
+  
+
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+  <nav class="bg-[#121416]/60 backdrop-blur-xl text-[#a9c7ff] text-sm font-semibold tracking-wide sticky top-0 z-50 border-b border-[#414754]/15 shadow-2xl shadow-black/40">
+    <div class="flex justify-between items-center w-full px-8 h-16 max-w-[1920px] mx-auto">
+      <div class="flex items-center gap-8">
+        <span class="text-2xl font-black tracking-tighter text-[#a9c7ff] uppercase">Pitch Pal</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="flex min-h-[calc(100vh-64px)]">
+    <aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] w-64 sticky top-16 bg-[#1a1c1e] border-r border-[#414754]/15">
+      <div class="flex flex-col h-full py-6">
+        <div class="px-6 mb-8">
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-high">
+            <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+            </div>
+            <div>
+              <p class="font-headline font-bold uppercase tracking-widest text-[10px] text-slate-400">Project</p>
+              <p class="font-headline font-extrabold text-sm text-on-surface">Series A Ready</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto bg-background p-8">
+      <header class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div class="max-w-2xl">
+          <span class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-2 block font-bold">Analysis Report</span>
+          <h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface mb-4">Pitch Analysis</h1>
+          <p id="summaryFeedback" class="text-on-surface-variant text-lg leading-relaxed max-w-xl">
+            Loading feedback...
+          </p>
+        </div>
+      </header>
+
+      <div class="grid grid-cols-12 gap-8">
+        <!-- Left column -->
+        <section class="col-span-12 lg:col-span-4 space-y-8">
+          <div class="glass-panel p-8 rounded-lg border border-outline-variant/10 flex flex-col items-center text-center">
+            <h3 class="font-headline font-bold uppercase tracking-widest text-xs text-slate-400 mb-8">Overall Impact Score</h3>
+
+            <div class="relative w-48 h-48 flex items-center justify-center">
+              <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="transparent" stroke="#1a1c1e" stroke-width="8"></circle>
+                <circle
+                  id="overallCircle"
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="transparent"
+                  stroke="currentColor"
+                  class="text-primary"
+                  stroke-width="8"
+                  stroke-dasharray="282.7"
+                  stroke-dashoffset="282.7"
+                ></circle>
+              </svg>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="overallScore" class="font-headline text-6xl font-black text-on-surface">0</span>
+                <span class="font-label text-xs text-slate-500 font-bold">OUT OF 100</span>
+              </div>
+            </div>
+
+            <p id="overallExplanation" class="mt-8 text-on-surface-variant text-sm px-4">
+              Loading score explanation...
+            </p>
+          </div>
+
+          <div class="bg-surface-container-low p-8 rounded-lg border border-outline-variant/5">
+            <h3 class="font-headline font-bold uppercase tracking-widest text-xs text-slate-400 mb-6">Dimension Breakdown</h3>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-bold">Clarity</span>
+                  <span id="clarityScore" class="text-sm text-primary font-bold">0%</span>
+                </div>
+                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div id="clarityBar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-bold">Persuasiveness</span>
+                  <span id="persuasivenessScore" class="text-sm text-primary font-bold">0%</span>
+                </div>
+                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div id="persuasivenessBar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-bold">Confidence</span>
+                  <span id="confidenceScore" class="text-sm text-primary font-bold">0%</span>
+                </div>
+                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div id="confidenceBar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-bold">Narrative Flow</span>
+                  <span id="flowScore" class="text-sm text-primary font-bold">0%</span>
+                </div>
+                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div id="flowBar" class="h-full bg-tertiary rounded-full" style="width: 0%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right column -->
+        <section class="col-span-12 lg:col-span-8">
+          <div class="bg-surface-container-low rounded-lg border border-outline-variant/10 overflow-hidden flex flex-col h-full">
+            <div class="p-6 border-b border-outline-variant/15 flex items-center justify-between bg-surface-container-high/30">
+              <div class="flex gap-4">
+                <button class="px-4 py-2 text-xs font-bold bg-primary/10 text-primary rounded-full border border-primary/20">Transcript Feedback</button>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1">
+                  <div class="w-2 h-2 rounded-full bg-primary-container"></div>
+                  <span class="text-[10px] font-bold text-slate-400 uppercase">Strong Point</span>
+                </div>
+                <div class="flex items-center gap-1 ml-4">
+                  <div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                  <span class="text-[10px] font-bold text-slate-400 uppercase">Needs Focus</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="transcriptFeedbackContainer" class="p-10 space-y-10 font-body text-xl leading-[2.2] text-on-surface-variant overflow-y-auto max-h-[1000px]">
+              <p id="transcriptText">Loading transcript...</p>
+            </div>
+
+            <div class="mt-auto p-8 bg-surface-container-lowest border-t border-outline-variant/10">
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500">Pitch Sentiment Heatmap</h4>
+                <span id="durationText" class="text-xs text-slate-500">Duration: 00:00</span>
+              </div>
+
+              <div id="heatmapContainer" class="h-8 w-full rounded-full bg-surface-container-high overflow-hidden flex">
+              </div>
+
+              <div class="flex justify-between mt-2 px-1">
+                <span class="text-[10px] font-bold text-slate-600">START</span>
+                <span class="text-[10px] font-bold text-slate-600">END</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/mic.js"></script>
+</body>
+</html>
