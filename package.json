@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.43.0",
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "form-data": "^4.0.5",
+    "multer": "^2.1.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^4.2.2"
+  }
+}
