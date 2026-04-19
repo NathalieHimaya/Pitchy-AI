@@ -10,6 +10,59 @@
   <script src="styling/tailwind.config.js"></script>
   <script src="scripts/mic.js" defer></script>
   <link rel="stylesheet" href="styling/new-pitch-style.css">
+
+  <style>
+    /* ── Recording timer ─────────────────────────────────────────── */
+    .recording-timer {
+      font-family: var(--font-headline);
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: var(--color-on-primary-fixed);
+      line-height: 1;
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .recording-timer.hidden { display: none; }
+
+    .recording-timer__dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: var(--radius-full);
+      background-color: var(--color-error);
+      animation: pulse 1s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    /* ── Live waveform canvas ────────────────────────────────────── */
+    #waveformLive {
+      display: block;
+      width: 100%;
+      max-width: 28rem;
+      height: 8rem;
+      margin-bottom: var(--space-12);
+    }
+
+    #waveformLive.hidden { display: none !important; }
+
+    /* ── Mic button active pulse ring ────────────────────────────── */
+    .recording-card__btn--active {
+      box-shadow:
+        0 0 0 0 rgba(255, 85, 85, 0.7),
+        var(--shadow-primary-glow);
+      animation: mic-pulse 1.2s ease-out infinite;
+    }
+
+    @keyframes mic-pulse {
+      0%   { box-shadow: 0 0 0 0     rgba(255, 85, 85, 0.6), var(--shadow-primary-glow); }
+      70%  { box-shadow: 0 0 0 1.2rem rgba(255, 85, 85, 0),  var(--shadow-primary-glow); }
+      100% { box-shadow: 0 0 0 0     rgba(255, 85, 85, 0),   var(--shadow-primary-glow); }
+    }
+  </style>
 </head>
 <body>
 
@@ -59,13 +112,11 @@
 
     <!-- Footer -->
     <div class="sidebar__footer">
-      <!-- Upgrade card -->
       <div class="upgrade-card">
         <p class="upgrade-card__label">Upgrade to Pro</p>
         <p class="upgrade-card__body">Unlock advanced neural analysis</p>
         <button class="upgrade-card__btn">Get Started</button>
       </div>
-      <!-- Footer nav -->
       <nav class="sidebar__footer-nav">
         <a href="#" class="sidebar__footer-link">
           <span class="material-symbols-outlined">help</span>
@@ -85,12 +136,10 @@
     <!-- Header -->
     <header class="header">
       <div class="header__inner">
-
         <div class="flex items-center gap-8">
           <span></span>
         </div>
 
-        <!-- Center: Search -->
         <div class="header__search">
           <div class="search-wrapper">
             <span class="material-symbols-outlined search-wrapper__icon">search</span>
@@ -102,7 +151,6 @@
           </div>
         </div>
 
-        <!-- Right: Actions -->
         <div class="header__actions">
           <div class="header__icon-group">
             <span class="material-symbols-outlined header__icon">notifications</span>
@@ -143,8 +191,14 @@
             <div class="recording-card__shine"></div>
             <div class="recording-card__body">
 
-              <!-- Waveform -->
-              <div class="waveform">
+              <!-- ── TIMER (hidden until recording starts) ── -->
+              <div id="recordingTimer" class="recording-timer hidden">
+                <span class="recording-timer__dot"></span>
+                <span id="recordingTimerDisplay">00:00</span>
+              </div>
+
+              <!-- ── STATIC decorative waveform (visible when idle) ── -->
+              <div id="waveformStatic" class="waveform">
                 <div class="waveform__bar" style="height:40%; background:rgba(60,144,255,0.4); animation-delay:0.1s;"></div>
                 <div class="waveform__bar" style="height:60%; background:rgba(60,144,255,0.6); animation-delay:0.3s;"></div>
                 <div class="waveform__bar" style="height:80%; background:var(--color-primary);   animation-delay:0.5s;"></div>
@@ -158,6 +212,9 @@
                 <div class="waveform__bar" style="height:25%; background:rgba(60,144,255,0.2); animation-delay:0.3s;"></div>
               </div>
 
+              <!-- ── LIVE canvas waveform (shown while recording) ── -->
+              <canvas id="waveformLive" class="hidden" aria-hidden="true"></canvas>
+
               <!-- Controls -->
               <div class="controls">
                 <button class="ctrl-btn ctrl-btn--secondary" aria-label="Voice settings">
@@ -170,17 +227,17 @@
                 </button>
 
                 <button type="button" id="stopBtn" class="ctrl-btn ctrl-btn--secondary ctrl-btn--secondary--danger" aria-label="Stop recording">
-                 <span class="material-symbols-outlined ctrl-btn__icon">stop</span>
+                  <span class="material-symbols-outlined ctrl-btn__icon">stop</span>
                 </button>
               </div>
 
-              <p class="recording-card__hint">Click mic to start recording</p>
+              <!-- Hint text (updated by mic.js) -->
+              <p id="recordingHint" class="recording-card__hint">Click mic to start recording</p>
             </div>
           </div>
 
           <!-- Script / Text Card -->
           <div class="card card--padded-lg">
-
             <div class="script-card__header">
               <h3 class="script-card__title">Pitch Script</h3>
               <div class="script-card__meta">
@@ -207,9 +264,7 @@
           <!-- Real-time Insights -->
           <div class="card card--padded-sm insights-card">
             <h4 class="insights-card__heading">Real-time Insights</h4>
-
             <div class="insights-list">
-
               <div class="insight insight--primary">
                 <span class="material-symbols-outlined insight__icon--primary">auto_awesome</span>
                 <div>
@@ -220,7 +275,6 @@
                   </p>
                 </div>
               </div>
-
               <div class="insight insight--tertiary">
                 <span class="material-symbols-outlined insight__icon--tertiary">speed</span>
                 <div>
@@ -231,7 +285,6 @@
                   </p>
                 </div>
               </div>
-
               <div class="insight insight--secondary">
                 <span class="material-symbols-outlined insight__icon--secondary">psychology</span>
                 <div>
@@ -247,14 +300,12 @@
           <!-- Sentiment Arc -->
           <div class="card card--padded-sm">
             <h4 class="sentiment-card__heading">Sentiment Arc</h4>
-
             <div class="sentiment-bar">
               <div class="sentiment-bar__segment" style="width:20%; background:rgba(60,144,255,0.4);"></div>
               <div class="sentiment-bar__segment" style="width:30%; background:var(--color-primary);"></div>
               <div class="sentiment-bar__segment" style="width:15%; background:var(--color-tertiary);"></div>
               <div class="sentiment-bar__segment" style="width:35%; background:var(--color-primary-container);"></div>
             </div>
-
             <div class="sentiment-bar__labels">
               <span class="sentiment-bar__label">Problem</span>
               <span class="sentiment-bar__label">Solution</span>
