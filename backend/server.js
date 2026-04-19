@@ -49,10 +49,11 @@ async function transcribeWithElevenLabs(file) {
   return data;
 }
 
-async function analyzeWithGemini(transcript, durationSeconds) {
-  console.log("GEMINI ANALYSIS STARTED");
+async function analyzeWithGemmaLocal(transcript, durationSeconds) { // If using gemini switch to analyzeWithGemini
+  console.log("LOCAL GEMMA ANALYSIS STARTED");
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  // // ----- ONLY WHEN USING GEMINI ------
+  // const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); 
 
   const prompt = `
 You are an expert pitch coach.
@@ -83,14 +84,7 @@ Return EXACTLY this shape:
       "quote": "",
       "explanation": ""
     }
-  ],
-  "heatmap": [
-    {
-      "label": "",
-      "score": 0,
-      "duration_seconds": 0
-    }
-  ],
+  ]
   "duration": ""
 }
 
@@ -98,8 +92,6 @@ Rules:
 - Scores must be integers from 0 to 100.
 - strong_points must have 1 or 2 items.
 - needs_focus must have 1 or 2 items.
-- heatmap must have 3 to 5 segments.
-- Make the heatmap represent the full speech from start to finish.
 - duration must match the total speech length as mm:ss.
 - Base the analysis only on the transcript content.
 - Keep explanations concise and useful.
@@ -111,25 +103,55 @@ Transcript:
 ${transcript}
 `;
 
-  const result = await model.generateContent(prompt);
-  const text = result.response.text().trim();
+  const response = await fetch("http://localhost:11434/api/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "gemma3:4b",
+      prompt,
+      stream: false
+    })
+  });
 
-  console.log("RAW GEMINI RESPONSE:");
-  console.log(text);
+  const data = await response.json();
+  console.log("OLLAMA RESPONSE:", data);
 
-  const cleaned = text
-    .replace(/```json/gi, "")
-    .replace(/```/g, "")
-    .trim();
+  const text = data.response.trim();
+// ----- ONLY WHEN USING GEMINI ------
+  // const cleaned = text.replace(/```json/gi, "").replace(/```/g, "").trim();
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
 
-  try {
-    return JSON.parse(cleaned);
-  } catch (parseError) {
-    console.error("GEMINI JSON PARSE ERROR:", parseError);
-    console.error("CLEANED GEMINI TEXT:", cleaned);
-    throw new Error("Gemini returned invalid JSON");
-  }
+if (!jsonMatch) {
+  console.error("NO JSON FOUND IN GEMMA RESPONSE");
+  throw new Error("Invalid Gemma output");
 }
+
+const cleaned = jsonMatch[0];
+
+  return JSON.parse(cleaned);
+}
+
+// ----- ONLY WHEN USING GEMINI ------
+  // const result = await model.generateContent(prompt);
+  // const text = result.response.text().trim();
+
+  // console.log("RAW GEMINI RESPONSE:");
+  // console.log(text);
+
+  // const cleaned = text
+  //   .replace(/```json/gi, "")
+  //   .replace(/```/g, "")
+  //   .trim();
+
+  // try {
+  //   return JSON.parse(cleaned);
+  // } catch (parseError) {
+  //   console.error("GEMINI JSON PARSE ERROR:", parseError);
+  //   console.error("CLEANED GEMINI TEXT:", cleaned);
+  //   throw new Error("Gemini returned invalid JSON");
+  // }
 
 app.post("/analyze", upload.single("file"), async (req, res) => {
   try {
@@ -142,10 +164,10 @@ app.post("/analyze", upload.single("file"), async (req, res) => {
     const sttData = await transcribeWithElevenLabs(req.file);
     const transcript = sttData.text || "No transcript returned";
 
-    console.log("TRANSCRIPT READY FOR GEMINI:");
+    console.log("TRANSCRIPT READY FOR GEMMA/GEMINI:");
     console.log(transcript);
 
-    const analysis = await analyzeWithGemini(
+    const analysis = await analyzeWithGemmaLocal (
       transcript,
       sttData.audio_duration_secs || 0
     );
