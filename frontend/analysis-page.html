@@ -1,177 +1,329 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
-
 <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pitchy AI | Your Analysis</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="assets/Pitch-AI-Logo.png">
+  <link rel="stylesheet" href="styling/new-pitch-style.css">
+  <link rel="stylesheet" href="styling/analysis-style.css" />
   <script src="styling/tailwind.config.js"></script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link rel="stylesheet" href="styling/analysis-style.css" />
+</head>
 
-<body class="bg-background text-on-background font-body selection:bg-primary/30">
-  <nav class="bg-[#121416]/60 backdrop-blur-xl text-[#a9c7ff] text-sm font-semibold tracking-wide sticky top-0 z-50 border-b border-[#414754]/15 shadow-2xl shadow-black/40">
-    <div class="flex justify-between items-center w-full px-8 h-16 max-w-[1920px] mx-auto">
-      <div class="flex items-center gap-8">
-        <span class="text-2xl font-black tracking-tighter text-[#a9c7ff] uppercase">Pitch Pal</span>
+<body>
+
+  <!-- ── Sidebar ──────────────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div style="padding: var(--space-8);">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">
+          <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">
+            rocket_launch
+          </span>
+        </div>
+        <div>
+          <p class="sidebar__app-name">Pitchy-AI</p>
+          <p class="sidebar__app-tagline">Series A Ready</p>
+        </div>
       </div>
-    </div>
-  </nav>
 
-  <div class="flex min-h-[calc(100vh-64px)]">
-    <aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] w-64 sticky top-16 bg-[#1a1c1e] border-r border-[#414754]/15">
-      <div class="flex flex-col h-full py-6">
-        <div class="px-6 mb-8">
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-high">
-            <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-              <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
-            </div>
-            <div>
-              <p class="font-headline font-bold uppercase tracking-widest text-[10px] text-slate-400">Project</p>
-              <p class="font-headline font-extrabold text-sm text-on-surface">Series A Ready</p>
-            </div>
+      <nav class="sidebar__nav">
+        <a href="landing-page.html" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">home</span>
+          Home
+        </a>
+        <a href="dashboard-page.html" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">insights</span>
+          Performance
+        </a>
+        <a href="#" class="sidebar__nav-link"
+           style="color: var(--color-primary);
+                  background: linear-gradient(to right, rgba(60,144,255,0.1), transparent);
+                  border-right: 3px solid var(--color-primary);">
+          <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">psychology</span>
+          AI Feedback
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">groups</span>
+          Audience Insights
+        </a>
+        <a href="#" class="sidebar__nav-link">
+          <span class="material-symbols-outlined">settings_suggest</span>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar__footer">
+      <div class="upgrade-card">
+        <p class="upgrade-card__label">Upgrade to Pro</p>
+        <p class="upgrade-card__body">Unlock advanced neural analysis</p>
+        <button class="upgrade-card__btn">Get Started</button>
+      </div>
+      <nav class="sidebar__footer-nav">
+        <a href="#" class="sidebar__footer-link">
+          <span class="material-symbols-outlined">help</span>
+          Help Center
+        </a>
+        <a href="#" class="sidebar__footer-link">
+          <span class="material-symbols-outlined">logout</span>
+          Logout
+        </a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- ── Main canvas ──────────────────────────────────────────────── -->
+  <main class="main-canvas">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <div class="flex items-center gap-8"><span></span></div>
+
+        <div class="header__search">
+          <div class="search-wrapper">
+            <span class="material-symbols-outlined search-wrapper__icon">search</span>
+            <input class="search-input" type="text" placeholder="Search pitches, feedback, or insights…">
           </div>
         </div>
-      </div>
-    </aside>
 
-    <main class="flex-1 overflow-y-auto bg-background p-8">
-      <header class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-        <div class="max-w-2xl">
-          <span class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-2 block font-bold">Analysis Report</span>
-          <h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface mb-4">Pitch Analysis</h1>
-          <p id="summaryFeedback" class="text-on-surface-variant text-lg leading-relaxed max-w-xl">
-            Loading feedback...
-          </p>
+        <div class="header__actions">
+          <div class="header__icon-group">
+            <span class="material-symbols-outlined header__icon">notifications</span>
+          </div>
+          <img
+            class="header__avatar"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo1RfZDWeO9tZ8AvCMImLX0---3qZPg-2rEUyXwqnVQc48Zu6dv4NY86CzZjA-OpWU3Bxeb1_s3-NU9ku_Ddl9n7KJwH-j2t3E1zNbKmwj7BAZc8wwf8Z0UtfHQtd-XmK5A_kqev4Qa2jlOVC0AQSuGKHOb49fSY_1GgM-76jDamRMQ9HkCjhG1jf0dzLspbd3isho9JfazVbHkLoXyWu2LW5_EaBp-s63HjNAqTeL0PXMdoQwkMuw1FiCFazFmed-LrqxbIrxlSI"
+            alt="User profile"
+          >
         </div>
-      </header>
+      </div>
+    </header>
 
-      <div class="grid grid-cols-12 gap-8">
-        <!-- Left column -->
-        <section class="col-span-12 lg:col-span-4 space-y-8">
-          <div class="glass-panel p-8 rounded-lg border border-outline-variant/10 flex flex-col items-center text-center">
-            <h3 class="font-headline font-bold uppercase tracking-widest text-xs text-slate-400 mb-8">Overall Impact Score</h3>
+    <!-- Page Content -->
+    <section class="page-section">
 
-            <div class="relative w-48 h-48 flex items-center justify-center">
-              <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="transparent" stroke="#1a1c1e" stroke-width="8"></circle>
-                <circle
-                  id="overallCircle"
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  fill="transparent"
-                  stroke="currentColor"
-                  class="text-primary"
-                  stroke-width="8"
-                  stroke-dasharray="282.7"
-                  stroke-dashoffset="282.7"
-                ></circle>
-              </svg>
-
-              <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <span id="overallScore" class="font-headline text-6xl font-black text-on-surface">0</span>
-                <span class="font-label text-xs text-slate-500 font-bold">OUT OF 100</span>
-              </div>
+      <!-- Page header -->
+      <div class="page-header">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap: var(--space-6);">
+          <div>
+            <div class="live-badge" style="background:rgba(52,208,122,0.08); border-color:rgba(52,208,122,0.2);">
+              <span class="live-badge__dot" style="background:#34d07a; animation:none;"></span>
+              <span class="live-badge__label" style="color:#34d07a;">Analysis Complete</span>
             </div>
-
-            <p id="overallExplanation" class="mt-8 text-on-surface-variant text-sm px-4">
-              Loading score explanation...
+            <h2 class="page-header__title">
+              Your <span class="gradient-text">Pitch Analysis.</span>
+            </h2>
+            <!-- JS populates this -->
+            <p id="overallExplanation" class="page-header__subtitle">
+              Loading feedback…
             </p>
           </div>
 
-          <div class="bg-surface-container-low p-8 rounded-lg border border-outline-variant/5">
-            <h3 class="font-headline font-bold uppercase tracking-widest text-xs text-slate-400 mb-6">Dimension Breakdown</h3>
-
-            <div class="space-y-6">
-              <div>
-                <div class="flex justify-between mb-2">
-                  <span class="text-sm font-bold">Clarity</span>
-                  <span id="clarityScore" class="text-sm text-primary font-bold">0%</span>
-                </div>
-                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                  <div id="clarityBar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-2">
-                  <span class="text-sm font-bold">Persuasiveness</span>
-                  <span id="persuasivenessScore" class="text-sm text-primary font-bold">0%</span>
-                </div>
-                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                  <div id="persuasivenessBar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-2">
-                  <span class="text-sm font-bold">Confidence</span>
-                  <span id="confidenceScore" class="text-sm text-primary font-bold">0%</span>
-                </div>
-                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                  <div id="confidenceBar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-2">
-                  <span class="text-sm font-bold">Narrative Flow</span>
-                  <span id="flowScore" class="text-sm text-primary font-bold">0%</span>
-                </div>
-                <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                  <div id="flowBar" class="h-full bg-tertiary rounded-full" style="width: 0%"></div>
-                </div>
-              </div>
-            </div>
+          <div style="display:flex; gap: var(--space-4); flex-shrink:0;">
+            <button class="action-btn action-btn--ghost">
+              <span class="material-symbols-outlined" style="font-size:1.1rem;">share</span>
+              Export PDF
+            </button>
+            <a href="new-pitch-page.html" class="action-btn action-btn--primary">
+              <span class="material-symbols-outlined" style="font-size:1.1rem; font-variation-settings:'FILL' 1;">mic</span>
+              New Pitch
+            </a>
           </div>
-        </section>
-
-        <!-- Right column -->
-        <section class="col-span-12 lg:col-span-8">
-          <div class="bg-surface-container-low rounded-lg border border-outline-variant/10 overflow-hidden flex flex-col h-full">
-            <div class="p-6 border-b border-outline-variant/15 flex items-center justify-between bg-surface-container-high/30">
-              <div class="flex gap-4">
-                <button class="px-4 py-2 text-xs font-bold bg-primary/10 text-primary rounded-full border border-primary/20">Transcript Feedback</button>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="flex items-center gap-1">
-                  <div class="w-2 h-2 rounded-full bg-primary-container"></div>
-                  <span class="text-[10px] font-bold text-slate-400 uppercase">Strong Point</span>
-                </div>
-                <div class="flex items-center gap-1 ml-4">
-                  <div class="w-2 h-2 rounded-full bg-tertiary"></div>
-                  <span class="text-[10px] font-bold text-slate-400 uppercase">Needs Focus</span>
-                </div>
-              </div>
-            </div>
-
-            <div id="transcriptFeedbackContainer" class="p-10 space-y-10 font-body text-xl leading-[2.2] text-on-surface-variant overflow-y-auto max-h-[1000px]">
-              <p id="transcriptText">Loading transcript...</p>
-            </div>
-
-            <div class="mt-auto p-8 bg-surface-container-lowest border-t border-outline-variant/10">
-              <div class="flex justify-between items-center mb-4">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500">Pitch Sentiment Heatmap</h4>
-                <span id="durationText" class="text-xs text-slate-500">Duration: 00:00</span>
-              </div>
-
-              <div id="heatmapContainer" class="h-8 w-full rounded-full bg-surface-container-high overflow-hidden flex">
-              </div>
-
-              <div class="flex justify-between mt-2 px-1">
-                <span class="text-[10px] font-bold text-slate-600">START</span>
-                <span class="text-[10px] font-bold text-slate-600">END</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
-    </main>
-  </div>
 
-  <script src="scripts/analysis.js"></script>
+      <!-- Bento Grid — 8 / 4 split -->
+      <div class="bento-grid">
+
+        <!-- ── LEFT COLUMN ──────────────────────────────────────── -->
+        <div class="bento-main">
+
+          <!-- Transcript & AI feedback card -->
+          <div class="card" style="overflow:hidden;">
+
+            <!-- Tab bar -->
+            <div style="display:flex; justify-content:space-between; align-items:center;
+                        padding: var(--space-5) var(--space-8);
+                        border-bottom: 1px solid rgba(65,71,84,0.15);
+                        background-color: rgba(34,38,44,0.5);">
+              <div style="display:flex; gap: var(--space-2);">
+                <button class="tab-btn tab-btn--active">Transcript Feedback</button>
+                <button class="tab-btn">Tone Map</button>
+                <button class="tab-btn">Key Takeaways</button>
+              </div>
+              <div style="display:flex; gap: var(--space-6);">
+                <span class="legend-dot">
+                  <span class="legend-dot__circle" style="background:var(--color-primary);"></span>
+                  Strong Point
+                </span>
+                <span class="legend-dot">
+                  <span class="legend-dot__circle" style="background:var(--color-tertiary);"></span>
+                  Needs Focus
+                </span>
+              </div>
+            </div>
+
+            <!-- ── Transcript body — populated by analysis-test.js ── -->
+            <div
+              id="transcriptFeedbackContainer"
+              style="padding: var(--space-10);
+                     max-height: 640px;
+                     overflow-y: auto;
+                     display: flex;
+                     flex-direction: column;
+                     gap: var(--space-10);">
+              <!-- JS inserts transcript + strong_points + needs_focus here -->
+              <p class="transcript-body" style="color:#64748b;">Loading transcript…</p>
+            </div>
+
+            <!-- Sentiment heatmap footer -->
+            <div style="padding: var(--space-8);
+                        border-top: 1px solid rgba(65,71,84,0.12);
+                        background-color: var(--color-surface-container-lowest);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--space-4);">
+                <h4 class="section-label" style="margin-bottom:0;">Pitch Sentiment Heatmap</h4>
+                <!-- JS sets this -->
+                <span id="durationText" style="font-size:0.625rem; font-weight:700; color:#64748b; letter-spacing:0.1em; text-transform:uppercase;">
+                  Duration: 00:00
+                </span>
+              </div>
+
+              <!-- JS populates segments inside here -->
+              <div id="heatmapContainer" class="heatmap-bar"></div>
+
+              <div style="display:flex; justify-content:space-between; margin-top: var(--space-2); padding: 0 var(--space-1);">
+                <span style="font-size:0.55rem; font-weight:700; color:#414754; letter-spacing:0.15em;">START</span>
+                <span style="font-size:0.55rem; font-weight:700; color:#414754; letter-spacing:0.15em;">END</span>
+              </div>
+            </div>
+
+          </div><!-- /transcript card -->
+
+        </div><!-- /bento-main -->
+
+        <!-- ── RIGHT COLUMN ─────────────────────────────────────── -->
+        <div class="bento-sidebar">
+
+          <!-- Overall score card -->
+          <div class="card card--padded-sm insights-card"
+               style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+            <h4 class="insights-card__heading">Overall Impact Score</h4>
+
+            <div class="score-ring">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Track -->
+                <circle cx="50" cy="50" r="45" fill="transparent"
+                        stroke="#1a1c1e" stroke-width="8"/>
+                <!-- Fill circle — JS drives stroke-dashoffset via id="overallCircle" -->
+                <circle
+                  id="overallCircle"
+                  cx="50" cy="50" r="45"
+                  fill="transparent"
+                  stroke="#a9c7ff"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                  stroke-dasharray="282.7"
+                  stroke-dashoffset="282.7"/>
+              </svg>
+              <div class="score-ring__inner">
+                <!-- JS sets textContent -->
+                <span id="overallScore" class="score-ring__value">0</span>
+                <span class="score-ring__label">Out of 100</span>
+              </div>
+            </div>
+
+            <!-- JS sets textContent via overallExplanation — mirrored from page header -->
+            <p style="margin-top: var(--space-6); font-size:0.8125rem; line-height:1.65;
+                      color: var(--color-on-surface-variant); padding: 0 var(--space-2);"
+               id="overallExplanationCard">
+              Loading score explanation…
+            </p>
+          </div>
+
+          <!-- Dimension breakdown card -->
+          <div class="card card--padded-sm">
+            <h4 class="insights-card__heading">Dimension Breakdown</h4>
+            <div style="display:flex; flex-direction:column; gap: var(--space-6);">
+
+              <div class="metric-row">
+                <div class="metric-row__header">
+                  <span class="metric-row__name">Clarity</span>
+                  <!-- JS sets -->
+                  <span id="clarityScore" class="metric-row__val">0%</span>
+                </div>
+                <div class="metric-bar">
+                  <div id="clarityBar" class="metric-bar__fill" style="width:0%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-row__header">
+                  <span class="metric-row__name">Persuasiveness</span>
+                  <span id="persuasivenessScore" class="metric-row__val">0%</span>
+                </div>
+                <div class="metric-bar">
+                  <div id="persuasivenessBar" class="metric-bar__fill" style="width:0%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-row__header">
+                  <span class="metric-row__name">Confidence</span>
+                  <span id="confidenceScore" class="metric-row__val">0%</span>
+                </div>
+                <div class="metric-bar">
+                  <div id="confidenceBar" class="metric-bar__fill" style="width:0%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-row__header">
+                  <span class="metric-row__name">Narrative Flow</span>
+                  <span id="flowScore" class="metric-row__val metric-row__val--warn">0%</span>
+                </div>
+                <div class="metric-bar">
+                  <div id="flowBar" class="metric-bar__fill metric-bar__fill--warn" style="width:0%;"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Visual tone card -->
+          <div class="tone-image-card">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuACdmFIN88nkqykNZ19HiXQ7xSll7PpqfN6_Asz1uAJUbmNDwEEyRKIGrAkO6vCI8_SlWS8vV5i49wTeZpNq7o1uOf_0_9enldDbQBdvkfjgUnmYDDfXPGf6nuaCHU6RD3_pW7Is9SX__KjVkhpd_quQ7NdC1BTLxk_hWrFglu-41oj_OA3YKWrShjHkm8MkMkvBKBRwttEY9IiF-nEkPetLnavD7p4nhUXl4E_XZE5zrsKYV5W9WXn_bUI2kMBkV0cb33Y9AsbYnY"
+              alt="Data visualization dashboard"
+            >
+            <div class="tone-image-card__overlay"></div>
+            <div class="tone-image-card__content">
+              <div class="pro-tip-card__label-row">
+                <span class="material-symbols-outlined pro-tip-card__label-icon">bar_chart</span>
+                <span class="pro-tip-card__label">Visual Tone Analysis</span>
+              </div>
+              <p class="pro-tip-card__quote" style="font-size:0.875rem;">
+                Professional &amp; Authoritative
+              </p>
+            </div>
+          </div>
+
+        </div><!-- /bento-sidebar -->
+
+      </div><!-- /bento-grid -->
+    </section>
+  </main>
+
+  <!-- analysis-test.js runs after DOM is ready -->
+  <script src="scripts/analysis-test.js"></script>
+
 </body>
 </html>
