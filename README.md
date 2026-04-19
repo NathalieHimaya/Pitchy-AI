@@ -85,7 +85,7 @@ GEMINI_API_KEY=your_gemini_key
 ### 4. Start the backend server
 
 ```
-node server.js
+node backend/server.js
 ```
 
 You should see:
