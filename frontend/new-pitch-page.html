@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,59 +9,6 @@
   <script src="styling/tailwind.config.js"></script>
   <script src="scripts/mic.js" defer></script>
   <link rel="stylesheet" href="styling/new-pitch-style.css">
-
-  <style>
-    /* ── Recording timer ─────────────────────────────────────────── */
-    .recording-timer {
-      font-family: var(--font-headline);
-      font-variant-numeric: tabular-nums;
-      font-weight: 800;
-      font-size: 2rem;
-      letter-spacing: 0.05em;
-      color: var(--color-on-primary-fixed);
-      line-height: 1;
-      margin-bottom: var(--space-6);
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-
-    .recording-timer.hidden { display: none; }
-
-    .recording-timer__dot {
-      width: 0.6rem;
-      height: 0.6rem;
-      border-radius: var(--radius-full);
-      background-color: var(--color-error);
-      animation: pulse 1s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-
-    /* ── Live waveform canvas ────────────────────────────────────── */
-    #waveformLive {
-      display: block;
-      width: 100%;
-      max-width: 28rem;
-      height: 8rem;
-      margin-bottom: var(--space-12);
-    }
-
-    #waveformLive.hidden { display: none !important; }
-
-    /* ── Mic button active pulse ring ────────────────────────────── */
-    .recording-card__btn--active {
-      box-shadow:
-        0 0 0 0 rgba(255, 85, 85, 0.7),
-        var(--shadow-primary-glow);
-      animation: mic-pulse 1.2s ease-out infinite;
-    }
-
-    @keyframes mic-pulse {
-      0%   { box-shadow: 0 0 0 0     rgba(255, 85, 85, 0.6), var(--shadow-primary-glow); }
-      70%  { box-shadow: 0 0 0 1.2rem rgba(255, 85, 85, 0),  var(--shadow-primary-glow); }
-      100% { box-shadow: 0 0 0 0     rgba(255, 85, 85, 0),   var(--shadow-primary-glow); }
-    }
-  </style>
 </head>
 <body>
 
@@ -76,7 +22,7 @@
           </span>
         </div>
         <div>
-          <p class="sidebar__app-name">Pitchy-AI AI</p>
+          <p class="sidebar__app-name">Pitchy-AI</p>
           <p class="sidebar__app-tagline">Series A Ready</p>
         </div>
       </div>
