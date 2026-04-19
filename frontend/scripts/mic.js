@@ -210,6 +210,18 @@ if (stopBtn) {
 async function sendAudio(audioBlob) {
   try {
     console.log("sendAudio called");
+    
+    // Set UI to loading state
+    if (stopBtn) {
+      stopBtn.innerHTML = `<span class="material-symbols-outlined ctrl-btn__icon animate-spin">sync</span>`;
+      stopBtn.disabled = true;
+    }
+    if (recordBtn) recordBtn.disabled = true;
+    if (hintEl) {
+      hintEl.textContent = "Analyzing pitch with AI... Please wait.";
+      hintEl.style.color = "var(--color-primary)";
+    }
+
     const formData = new FormData();
     formData.append("file", audioBlob, "recording.webm");
 
@@ -224,8 +236,7 @@ async function sendAudio(audioBlob) {
     console.log("Response JSON:", data);
 
     if (!res.ok) {
-      alert(data.error || "Analysis failed");
-      return;
+      throw new Error(data.error || "Analysis failed");
     }
 
     localStorage.setItem("pitchPalResults", JSON.stringify(data));
@@ -233,6 +244,17 @@ async function sendAudio(audioBlob) {
     window.location.href = "analysis-page.html";
   } catch (error) {
     console.error("sendAudio error:", error);
-    alert("Could not connect to server");
+    alert(error.message || "Could not connect to server");
+    
+    // Restore UI if there was an error
+    if (stopBtn) {
+      stopBtn.innerHTML = `<span class="material-symbols-outlined ctrl-btn__icon">stop</span>`;
+      stopBtn.disabled = false;
+    }
+    if (recordBtn) recordBtn.disabled = false;
+    if (hintEl) {
+      hintEl.textContent = "Click mic to start recording";
+      hintEl.style.color = "";
+    }
   }
 }

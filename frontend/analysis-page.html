@@ -173,26 +173,7 @@
               <p class="transcript-body" style="color:#64748b;">Loading transcript…</p>
             </div>
 
-            <!-- Sentiment heatmap footer -->
-            <div style="padding: var(--space-8);
-                        border-top: 1px solid rgba(65,71,84,0.12);
-                        background-color: var(--color-surface-container-lowest);">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--space-4);">
-                <h4 class="section-label" style="margin-bottom:0;">Pitch Sentiment Heatmap</h4>
-                <!-- JS sets this -->
-                <span id="durationText" style="font-size:0.625rem; font-weight:700; color:#64748b; letter-spacing:0.1em; text-transform:uppercase;">
-                  Duration: 00:00
-                </span>
-              </div>
 
-              <!-- JS populates segments inside here -->
-              <div id="heatmapContainer" class="heatmap-bar"></div>
-
-              <div style="display:flex; justify-content:space-between; margin-top: var(--space-2); padding: 0 var(--space-1);">
-                <span style="font-size:0.55rem; font-weight:700; color:#414754; letter-spacing:0.15em;">START</span>
-                <span style="font-size:0.55rem; font-weight:700; color:#414754; letter-spacing:0.15em;">END</span>
-              </div>
-            </div>
 
           </div><!-- /transcript card -->
 
@@ -293,7 +274,7 @@
   </main>
 
   <!-- analysis-test.js runs after DOM is ready -->
-  <script src="scripts/analysis-test.js"></script>
+  <script src="scripts/analysis.js"></script>
 
 </body>
 </html>

@@ -193,17 +193,6 @@ background: conic-gradient(#a9c7ff calc(82 * 1%), #1a1c1e 0);
     font-style: italic;
 }
 
-/* ── Sentiment heatmap ───────────────────────────────────────── */
-.heatmap-bar {
-    height: 2rem;
-    width: 100%;
-    border-radius: var(--radius-full);
-    background-color: var(--color-surface-container-high);
-    overflow: hidden;
-    display: flex;
-}
-
-.heatmap-bar__seg { height: 100%; }
 
 /* ── Tab buttons ─────────────────────────────────────────────── */
 .tab-btn {
