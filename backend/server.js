@@ -21,32 +21,60 @@ app.get("/", (req, res) => {
 });
 
 async function transcribeWithElevenLabs(file) {
-  const formData = new FormData();
+  let lastError;
 
-  formData.append("file", file.buffer, {
-    filename: file.originalname || "recording.webm",
-    contentType: file.mimetype || "audio/webm"
-  });
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      console.log(`ELEVENLABS STT ATTEMPT ${attempt}`);
 
-  formData.append("model_id", "scribe_v2");
+      const formData = new FormData();
+      formData.append("file", file.buffer, {
+        filename: file.originalname || "recording.webm",
+        contentType: file.mimetype || "audio/webm"
+      });
+      formData.append("model_id", "scribe_v2");
 
-  const response = await fetch("https://api.elevenlabs.io/v1/speech-to-text", {
-    method: "POST",
-    headers: {
-      "xi-api-key": process.env.ELEVEN_API_KEY,
-      ...formData.getHeaders()
-    },
-    body: formData
-  });
+      const response = await fetch("https://api.elevenlabs.io/v1/speech-to-text", {
+        method: "POST",
+        headers: {
+          "xi-api-key": process.env.ELEVEN_API_KEY,
+          ...formData.getHeaders()
+        },
+        body: formData
+      });
 
-  const data = await response.json();
-  console.log("ElevenLabs response:", data);
+      const rawText = await response.text();
+      let data;
 
-  if (!response.ok) {
-    throw new Error(data.detail || data.message || "Speech-to-text failed");
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        data = { raw: rawText };
+      }
+
+      console.log("ElevenLabs response:", data);
+
+      if (!response.ok) {
+        throw new Error(
+          data.detail ||
+          data.message ||
+          data.raw ||
+          `Speech-to-text failed with status ${response.status}`
+        );
+      }
+
+      return data;
+    } catch (error) {
+      lastError = error;
+      console.error(`ElevenLabs STT attempt ${attempt} failed:`, error.message);
+
+      if (attempt < 3) {
+        await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
+      }
+    }
   }
 
-  return data;
+  throw lastError;
 }
 
 async function analyzeWithGemmaLocal(transcript, durationSeconds) { // If using gemini switch to analyzeWithGemini
@@ -84,7 +112,7 @@ Return EXACTLY this shape:
       "quote": "",
       "explanation": ""
     }
-  ]
+  ],
   "duration": ""
 }
 
@@ -118,7 +146,15 @@ ${transcript}
   const data = await response.json();
   console.log("OLLAMA RESPONSE:", data);
 
-  const text = data.response.trim();
+  if (!response.ok || data.error) {
+    throw new Error(data.error || "Ollama request failed");
+  }
+
+  if (!data.response) {
+    throw new Error("Ollama did not return a response field");
+  }
+
+  const text = data.response.trim();;
 // ----- ONLY WHEN USING GEMINI ------
   // const cleaned = text.replace(/```json/gi, "").replace(/```/g, "").trim();
   const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -132,26 +168,6 @@ const cleaned = jsonMatch[0];
 
   return JSON.parse(cleaned);
 }
-
-// ----- ONLY WHEN USING GEMINI ------
-  // const result = await model.generateContent(prompt);
-  // const text = result.response.text().trim();
-
-  // console.log("RAW GEMINI RESPONSE:");
-  // console.log(text);
-
-  // const cleaned = text
-  //   .replace(/```json/gi, "")
-  //   .replace(/```/g, "")
-  //   .trim();
-
-  // try {
-  //   return JSON.parse(cleaned);
-  // } catch (parseError) {
-  //   console.error("GEMINI JSON PARSE ERROR:", parseError);
-  //   console.error("CLEANED GEMINI TEXT:", cleaned);
-  //   throw new Error("Gemini returned invalid JSON");
-  // }
 
 app.post("/analyze", upload.single("file"), async (req, res) => {
   try {
@@ -179,7 +195,7 @@ app.post("/analyze", upload.single("file"), async (req, res) => {
   } catch (error) {
     console.error("Analyze error:", error);
     return res.status(500).json({
-      error: "Failed to analyze speech"
+      error: error.message || "Failed to analyze speech"
     });
   }
 });
@@ -192,7 +208,7 @@ app.post("/generate-pitch-audio", async (req, res) => {
       return res.status(400).json({ error: "Transcript is required" });
     }
 
-    const response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/2zGvynULFssveGrcP8hiD", {
+    const response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/pqHfZKP75CvOlQylNhV4", {
       method: "POST",
       headers: {
         "xi-api-key": process.env.ELEVEN_API_KEY,
@@ -207,6 +223,7 @@ app.post("/generate-pitch-audio", async (req, res) => {
         }
       })
     });
+    
 // Eleven Labs Voice
     if (!response.ok) {
       const errorText = await response.text();
@@ -229,3 +246,24 @@ app.post("/generate-pitch-audio", async (req, res) => {
 app.listen(3000, () => {
   console.log("AI SERVER running on http://localhost:3000");
 });
+
+
+// ----- ONLY WHEN USING GEMINI ------
+  // const result = await model.generateContent(prompt);
+  // const text = result.response.text().trim();
+
+  // console.log("RAW GEMINI RESPONSE:");
+  // console.log(text);
+
+  // const cleaned = text
+  //   .replace(/```json/gi, "")
+  //   .replace(/```/g, "")
+  //   .trim();
+
+  // try {
+  //   return JSON.parse(cleaned);
+  // } catch (parseError) {
+  //   console.error("GEMINI JSON PARSE ERROR:", parseError);
+  //   console.error("CLEANED GEMINI TEXT:", cleaned);
+  //   throw new Error("Gemini returned invalid JSON");
+  // }

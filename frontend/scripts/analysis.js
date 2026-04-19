@@ -22,10 +22,8 @@ if (!raw) {
   const persuasivenessBar = document.getElementById("persuasivenessBar");
   const confidenceBar     = document.getElementById("confidenceBar");
   const flowBar           = document.getElementById("flowBar");
-
+  const hearPitchBtn                = document.getElementById("hearPitchBtn");
   const transcriptFeedbackContainer = document.getElementById("transcriptFeedbackContainer");
-  const durationText                = document.getElementById("durationText");
-  const heatmapContainer            = document.getElementById("heatmapContainer");
 
   // ── Safely extract fields ─────────────────────────────────────────
   const transcript      = data.transcript      || "No transcript available.";
@@ -37,8 +35,57 @@ if (!raw) {
   const summaryFeedback = data.summary_feedback || data.feedback || "No summary available.";
   const strongPoints    = Array.isArray(data.strong_points) ? data.strong_points : [];
   const needsFocus      = Array.isArray(data.needs_focus)   ? data.needs_focus   : [];
-  const heatmap         = Array.isArray(data.heatmap)       ? data.heatmap       : [];
-  const duration        = data.duration || "00:00";
+
+    if (hearPitchBtn) {
+    hearPitchBtn.addEventListener("click", async () => {
+      try {
+        hearPitchBtn.disabled = true;
+        hearPitchBtn.textContent = "Generating voice...";
+
+        const res = await fetch("http://localhost:3000/generate-pitch-audio", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            transcript
+          })
+        });
+
+        const result = await res.json();
+        console.log("TTS response:", result);
+
+        if (!res.ok) {
+          alert(result.error || "Failed to generate audio");
+          hearPitchBtn.disabled = false;
+          hearPitchBtn.innerHTML = `
+            <span class="material-symbols-outlined" style="font-size:1.1rem; font-variation-settings:'FILL' 1;">mic</span>
+            Hear How Your Pitch Could Sound Like
+          `;
+          return;
+        }
+
+        if (result.audioUrl) {
+          const audio = new Audio(result.audioUrl);
+          audio.play();
+        }
+
+        hearPitchBtn.disabled = false;
+        hearPitchBtn.innerHTML = `
+          <span class="material-symbols-outlined" style="font-size:1.1rem; font-variation-settings:'FILL' 1;">mic</span>
+          Hear How Your Pitch Could Sound Like
+        `;
+      } catch (error) {
+        console.error("TTS button error:", error);
+        alert("Could not generate pitch audio");
+        hearPitchBtn.disabled = false;
+        hearPitchBtn.innerHTML = `
+          <span class="material-symbols-outlined" style="font-size:1.1rem; font-variation-settings:'FILL' 1;">mic</span>
+          Hear How Your Pitch Could Sound Like
+        `;
+      }
+    });
+  }
 
   // ── Scores ────────────────────────────────────────────────────────
   if (overallScore)           overallScore.textContent           = overall;
@@ -62,11 +109,6 @@ if (!raw) {
     const offset = circumference - (overall / 100) * circumference;
     overallCircle.style.strokeDasharray  = `${circumference}`;
     overallCircle.style.strokeDashoffset = `${offset}`;
-  }
-
-  // ── Duration label ────────────────────────────────────────────────
-  if (durationText) {
-    durationText.textContent = `Duration: ${duration}`;
   }
 
   // ── Transcript + feedback bubbles ─────────────────────────────────
@@ -128,58 +170,9 @@ if (!raw) {
     });
   }
 
-  // ── Sentiment heatmap ─────────────────────────────────────────────
-  if (heatmapContainer) {
-    heatmapContainer.innerHTML = "";
-
-    if (heatmap.length === 0) {
-      // No heatmap data from Gemini — render a simple static fallback
-      // based on the four dimension scores so the bar is never empty
-      const segments = [
-        { score: clarity,        label: "Clarity" },
-        { score: persuasiveness, label: "Persuasiveness" },
-        { score: confidence,     label: "Confidence" },
-        { score: narrativeFlow,  label: "Narrative Flow" },
-      ];
-
-      segments.forEach((seg) => {
-        const bar = document.createElement("div");
-        bar.className    = "heatmap-bar__seg";
-        bar.style.width  = "25%";
-        bar.style.background = scoreToColor(seg.score);
-        bar.title        = `${seg.label}: ${seg.score}%`;
-        heatmapContainer.appendChild(bar);
-      });
-    } else {
-      const totalDuration = heatmap.reduce(
-        (sum, seg) => sum + Number(seg.duration_seconds || 0), 0
-      );
-
-      heatmap.forEach((segment) => {
-        const score           = Number(segment.score || 0);
-        const durationSeconds = Number(segment.duration_seconds || 0);
-        const widthPct        = totalDuration > 0
-          ? (durationSeconds / totalDuration) * 100
-          : 100 / heatmap.length;
-
-        const bar        = document.createElement("div");
-        bar.className    = "heatmap-bar__seg";
-        bar.style.width  = `${widthPct}%`;
-        bar.style.background = scoreToColor(score);
-        bar.title        = `${segment.label || "Segment"}: ${score}%`;
-        heatmapContainer.appendChild(bar);
-      });
-    }
-  }
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────
-function scoreToColor(score) {
-  if (score >= 80) return "var(--color-primary)";
-  if (score >= 60) return "var(--color-primary-container)";
-  if (score >= 40) return "var(--color-tertiary)";
-  return "rgba(240,160,80,0.45)";
-}
 
 function escapeHtml(text) {
   return String(text)
