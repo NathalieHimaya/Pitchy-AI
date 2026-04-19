@@ -109,7 +109,7 @@ ${transcript}
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "gemma3:4b",
+      model: "gemma4:e2b",
       prompt,
       stream: false
     })
@@ -181,6 +181,48 @@ app.post("/analyze", upload.single("file"), async (req, res) => {
     return res.status(500).json({
       error: "Failed to analyze speech"
     });
+  }
+});
+
+app.post("/generate-pitch-audio", async (req, res) => {
+  try {
+    const { transcript } = req.body;
+
+    if (!transcript) {
+      return res.status(400).json({ error: "Transcript is required" });
+    }
+
+    const response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/2zGvynULFssveGrcP8hiD", {
+      method: "POST",
+      headers: {
+        "xi-api-key": process.env.ELEVEN_API_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        text: transcript,
+        model_id: "eleven_multilingual_v2",
+        voice_settings: {
+          stability: 0.45,
+          similarity_boost: 0.75
+        }
+      })
+    });
+// Eleven Labs Voice
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("ElevenLabs TTS error:", errorText);
+      return res.status(500).json({ error: "Failed to generate pitch audio" });
+    }
+
+    const audioBuffer = await response.arrayBuffer();
+    const base64Audio = Buffer.from(audioBuffer).toString("base64");
+
+    return res.json({
+      audioUrl: `data:audio/mpeg;base64,${base64Audio}`
+    });
+  } catch (error) {
+    console.error("TTS route error:", error);
+    return res.status(500).json({ error: "Failed to generate pitch audio" });
   }
 });
 
