@@ -71,35 +71,27 @@
   <!-- Main Body -->
   <main class="main-canvas">
 
-    <!-- Header -->
-    <header class="header">
-      <div class="header__inner">
-        <div class="flex items-center gap-8">
-          <span></span>
-        </div>
+<!-- Header -->
+    <header class="bg-[#121416]/60 backdrop-blur-xl border-b border-[#414754]/15 h-16 sticky top-0 z-40 flex justify-between items-center px-8 max-w-[1920px] mx-auto">
 
-        <div class="header__search">
-          <div class="search-wrapper">
-            <span class="material-symbols-outlined search-wrapper__icon">search</span>
-            <input
-              class="search-input"
-              type="text"
-              placeholder="Search pitches, feedback, or insights…"
-            >
-          </div>
-        </div>
-
-        <div class="header__actions">
-          <div class="header__icon-group">
-            <span class="material-symbols-outlined header__icon">notifications</span>
-          </div>
-          <img
-            class="header__avatar"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo1RfZDWeO9tZ8AvCMImLX0---3qZPg-2rEUyXwqnVQc48Zu6dv4NY86CzZjA-OpWU3Bxeb1_s3-NU9ku_Ddl9n7KJwH-j2t3E1zNbKmwj7BAZc8wwf8Z0UtfHQtd-XmK5A_kqev4Qa2jlOVC0AQSuGKHOb49fSY_1GgM-76jDamRMQ9HkCjhG1jf0dzLspbd3isho9JfazVbHkLoXyWu2LW5_EaBp-s63HjNAqTeL0PXMdoQwkMuw1FiCFazFmed-LrqxbIrxlSI"
-            alt="User profile"
-          >
+      <div class="flex items-center gap-8">
+        <div class="relative hidden md:block">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+          <input class="bg-surface-container-lowest border-none rounded-full py-1.5 pl-10 pr-4 text-xs text-on-surface focus:ring-1 focus:ring-primary w-64 placeholder:text-slate-600" placeholder="Search pitches..." type="text"/>
         </div>
       </div>
+
+      <div class="flex items-center gap-4">
+        <button class="pitch-gradient text-on-primary-fixed font-headline font-bold text-sm px-6 py-2 rounded-full active:scale-95 transition-all shadow-lg shadow-primary/20"><a href="new-pitch-page.html"> New Pitch </a></button>
+        <div class="flex items-center gap-2 border-l border-outline-variant/30 pl-4">
+          <button class="p-2 text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+          <button class="p-2 text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">settings</span></button>
+          <div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+            <img alt="User profile" class="w-full h-full object-cover" data-alt="close up of a confident young entrepreneur portrait with cool studio lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEEkbMJ1oKR7lOHtujcFiuIzNc3K1uVHXipnX4-Rmtd2IXcQ0PrXPdhTjvL6zX0QvoJ64XX_0TiH-xL8XmiuCr5wooUWjk31OoG6C2n714SEQs-JR_F53Q2jZGPNlp7LISbArZLZZ5qGMTsFhaE1NX7EeScxjResy2KGnHpbMMSwgKZwH7gnWqSe0ZSlIDj3kLAvPajb2VZJie9zp8y5ud-GXDXFbyt_2rz7oPywnrlvbBvh8OeDHDuIB0k1ClJnbAWqBBi1TjVmo"/>
+          </div>
+        </div>
+      </div>
+
     </header>
 
     <!-- Page Content -->
